@@ -1,0 +1,188 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tríptico Interactivo</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#eceff1;
+    font-family:Arial, sans-serif;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.contenedor{
+    width:100%;
+    max-width:1200px;
+}
+
+.pagina{
+    display:none;
+    justify-content:center;
+    align-items:center;
+    animation:entrada .4s ease;
+}
+
+.pagina.activa{
+    display:flex;
+}
+
+.pagina img{
+    max-width:100%;
+    max-height:87vh;
+    width:auto;
+    height:auto;
+    object-fit:contain;
+
+    border-radius:12px;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+.botones{
+    margin-top:25px;
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+}
+
+button{
+    flex:1;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+button:hover{
+    transform:scale(1.02);
+}
+
+.contador{
+    text-align:center;
+    margin-top:15px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+@keyframes entrada{
+    from{
+        opacity:0;
+        transform:translateX(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="contenedor">
+
+    <!-- PAGINA 1 -->
+    <div class="pagina activa">
+        <img src="1.jpeg" alt="">
+    </div>
+
+    <!-- PAGINA 2 -->
+    <div class="pagina">
+        <img src="2.jpeg" alt="">
+    </div>
+
+    <!-- PAGINA 3 -->
+    <div class="pagina">
+        <img src="3.jpeg" alt="">
+    </div>
+
+    <!-- PAGINA 4 -->
+    <div class="pagina">
+        <img src="4.jpeg" alt="">
+    </div>
+
+    <!-- PAGINA 5 -->
+    <div class="pagina">
+        <img src="5.jpeg" alt="">
+    </div>
+
+    <!-- PAGINA 6 -->
+    <div class="pagina">
+        <img src="6.jpeg" alt="">
+    </div>
+   <!-- PAGINA 7 -->
+
+    <div class="pagina">
+
+        <img src="1.jpeg" alt="">
+
+    </div>
+
+    <div class="botones">
+        <button onclick="anterior()">◀ Anterior</button>
+        <button onclick="siguiente()">Siguiente ▶</button>
+    </div>
+
+    <div class="contador">
+        Página <span id="paginaActual">1</span> de <span id="totalPaginas">9</span>
+    </div>
+
+</div>
+
+<script>
+
+const paginas = document.querySelectorAll('.pagina');
+const paginaActual = document.getElementById('paginaActual');
+const totalPaginas = document.getElementById('totalPaginas');
+
+let actual = 0;
+
+totalPaginas.textContent = paginas.length;
+
+function mostrarPagina(indice){
+
+    paginas.forEach(pagina=>{
+        pagina.classList.remove('activa');
+    });
+
+    paginas[indice].classList.add('activa');
+
+    paginaActual.textContent = indice + 1;
+}
+
+function siguiente(){
+
+    if(actual < paginas.length - 1){
+        actual++;
+        mostrarPagina(actual);
+    }
+}
+
+function anterior(){
+
+    if(actual > 0){
+        actual--;
+        mostrarPagina(actual);
+    }
+}
+
+</script>
+
+</body>
+</html>
